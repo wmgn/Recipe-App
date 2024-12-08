@@ -2,10 +2,12 @@ package com.example.recipeapp.recipeDetail
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -37,44 +39,59 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeIngredients: TextView = findViewById(R.id.recipe_detail_ingredients)
         val recipeInstructions: TextView = findViewById(R.id.recipe_detail_instructions)
         val recipeRating: TextView = findViewById(R.id.recipe_detail_rating)
+        val recipeRatingBar: RatingBar = findViewById(R.id.recipe_rating_bar)
         val removeRecipeButton: Button = findViewById(R.id.remove_button)
 
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
-            //Log.w("Troubleshooting1", "bundle: " + bundle.toString())
             currentRecipeId = bundle.getString(RECIPE_ID)
         }
 
         /* If currentRecipeId is not null, get corresponding recipe and set name, image and
         description */
         currentRecipeId?.let {
-            val currentRecipe = recipeDetailViewModel.getRecipeForId(it)
-            recipeTitle.text = currentRecipe?.title
-            if (currentRecipe != null) {
-                if (currentRecipe.imageUrl != null) {
-                    CoroutineScope(Dispatchers.Main).launch {
-                        val bm = com.example.recipeapp.recipeList.getImageBitmap(currentRecipe.imageUrl)
-                        if (bm != null) {
-                            recipeImageView.setImageBitmap(bm)
+            val currentRecipe = recipeDetailViewModel.fetchRecipeById(it)
+
+            recipeDetailViewModel.recipe.observe(this) { currentRecipe ->
+                if (currentRecipe != null) {
+                    if (currentRecipe.imageUrl != null) {
+                        val imageUrl = currentRecipe.imageUrl
+                        if (imageUrl.startsWith("http")) {
+                            // Handle remote image URL
+                            CoroutineScope(Dispatchers.Main).launch {
+                                val bm = com.example.recipeapp.recipeList.getImageBitmap(imageUrl)
+                                if (bm != null) {
+                                    recipeImageView.setImageBitmap(bm)
+                                } else {
+                                    recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                                }
+                            }
+                        } else if (imageUrl.startsWith("content")) {
+                            // Handle local content URI
+                            val uri = Uri.parse(imageUrl)
+                            recipeImageView.setImageURI(uri)
                         } else {
                             recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                         }
+                    } else {
+                        recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                     }
-                } else {
-                    recipeImageView.setImageResource(R.drawable.ic_launcher_background)
-                }
-            }
-            recipeIngredients.text = currentRecipe?.ingredients
-            recipeInstructions.text = currentRecipe?.instructions
-            recipeRating.text = "Rating: " + currentRecipe?.rating.toString() // TODO rating change to not text ?
 
-            removeRecipeButton.setOnClickListener {
-                if (currentRecipe != null) {
-                    recipeDetailViewModel.removeRecipe(currentRecipe)
+                    recipeTitle.text = currentRecipe.title
+                    recipeIngredients.text = currentRecipe.ingredients
+                    recipeInstructions.text = currentRecipe.instructions
+                    recipeRating.text = "Rating: " + currentRecipe.rating.toString()
+                    recipeRatingBar.rating = currentRecipe.rating
+
+                    // remove button
+                    removeRecipeButton.setOnClickListener {
+                        recipeDetailViewModel.removeRecipe(currentRecipe)
+                        finish()
+                    }
                 }
-                finish()
             }
+
         }
 
     }

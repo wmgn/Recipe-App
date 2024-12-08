@@ -2,6 +2,7 @@ package com.example.recipeapp.recipeList
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
+import android.net.Uri
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -46,13 +47,23 @@ class RecipesAdapter(private val onClick: (Recipe) -> Unit) :
 
             recipeTextView.text = recipe.title
             if (recipe.imageUrl != null) {
-                CoroutineScope(Dispatchers.Main).launch {
-                    val bm = getImageBitmap(recipe.imageUrl)
-                    if (bm != null) {
-                        recipeImageView.setImageBitmap(bm)
-                    } else {
-                        recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                val imageUrl = recipe.imageUrl
+                if (imageUrl.startsWith("http")) {
+                    // Handle remote image URL
+                    CoroutineScope(Dispatchers.Main).launch {
+                        val bm = com.example.recipeapp.recipeList.getImageBitmap(imageUrl)
+                        if (bm != null) {
+                            recipeImageView.setImageBitmap(bm)
+                        } else {
+                            recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                        }
                     }
+                } else if (imageUrl.startsWith("content")) {
+                    // Handle local content URI
+                    val uri = Uri.parse(imageUrl)
+                    recipeImageView.setImageURI(uri)
+                } else {
+                    recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                 }
             } else {
                 recipeImageView.setImageResource(R.drawable.ic_launcher_background)

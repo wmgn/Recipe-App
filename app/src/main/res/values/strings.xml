@@ -17,4 +17,8 @@
     <string name="recipe_instructions_edit_text">Recipe Instructions</string>
     <string name="done_button_text">Done</string>
     <string name="recipe_imageUrl_edit_text">Recipe Image URL (e.g. https://thefoodcharlatan.com/wp-content/uploads/2023/04/Spaghetti-Sauce-Recipe-6.jpg)</string>
+    <string name="open_gallery_button_text">Open Photo Gallery</string>
+    <string name="publish_this_recipe">Publish This Recipe</string>
+    <string name="ingredients">Ingredients</string>
+    <string name="instructions">Instructions</string>
 </resources>

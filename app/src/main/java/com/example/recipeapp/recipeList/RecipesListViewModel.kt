@@ -5,6 +5,9 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.recipeapp.data.DataSource
 import com.example.recipeapp.data.Recipe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 import kotlin.random.Random
 
 class RecipesListViewModel(val dataSource: DataSource) : ViewModel() {
@@ -17,7 +20,7 @@ class RecipesListViewModel(val dataSource: DataSource) : ViewModel() {
             return
         }
 
-        val image = dataSource.getRandomRecipeImageAsset()
+        //val image = dataSource.getRandomRecipeImageAsset()
         val newRecipe = Recipe(
             Random.nextLong().toString(), // id, as a string
             recipeTitle,
@@ -27,7 +30,9 @@ class RecipesListViewModel(val dataSource: DataSource) : ViewModel() {
             0.0f
         )
 
-        dataSource.addRecipe(newRecipe)
+        CoroutineScope(Dispatchers.IO).launch {
+            dataSource.addRecipe(newRecipe)
+        }
     }
 }
 
@@ -37,7 +42,7 @@ class RecipesListViewModelFactory(private val context: Context) : ViewModelProvi
         if (modelClass.isAssignableFrom(RecipesListViewModel::class.java)) {
             @Suppress("UNCHECKED_CAST")
             return RecipesListViewModel(
-                dataSource = DataSource.getDataSource(context.resources)
+                dataSource = DataSource.getDataSource(context)
             ) as T
         }
         throw IllegalArgumentException("Unknown ViewModel class")
