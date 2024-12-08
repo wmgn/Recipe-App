@@ -1,64 +1,62 @@
 package com.example.recipeapp.data
 
+import android.content.Context
 import android.content.res.Resources
 import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 
-/* Handles operations on recipesLiveData and holds details about it. */
-class DataSource(resources: Resources) {
-    private val initialRecipeList = recipeList(resources)
-    private val recipesLiveData = MutableLiveData(initialRecipeList)
+class DataSource(context: Context) {
 
-    /* Adds recipe to liveData and posts value. */
-    fun addRecipe(recipe: Recipe) {
-        val currentList = recipesLiveData.value
-        if (currentList == null) {
-            recipesLiveData.postValue(listOf(recipe))
-        } else {
-            val updatedList = currentList.toMutableList()
-            updatedList.add(0, recipe)
-            recipesLiveData.postValue(updatedList)
+    // Get the Recipe DAO instance
+    private val recipeDao = RecipeDatabase.getDatabase(context).recipeDao()
+
+    /**
+     * Adds a recipe to the database.
+     * If the recipe already exists (based on the same ID), it will be replaced.
+     */
+    suspend fun addRecipe(recipe: Recipe) {
+        withContext(Dispatchers.IO) {
+            recipeDao.insertRecipe(recipe)
         }
     }
 
-    /* Removes recipe from liveData and posts value. */
-    fun removeRecipe(recipe: Recipe) {
-        val currentList = recipesLiveData.value
-        if (currentList != null) {
-            val updatedList = currentList.toMutableList()
-            updatedList.remove(recipe)
-            recipesLiveData.postValue(updatedList)
+    /**
+     * Removes a recipe from the database.
+     */
+    suspend fun removeRecipe(recipe: Recipe) {
+        withContext(Dispatchers.IO) {
+            recipeDao.deleteRecipe(recipe)
         }
     }
 
-    /* Returns recipe given an ID. */
-    fun getRecipeForId(id: String): Recipe? {
-        recipesLiveData.value?.let { recipes ->
-            return recipes.firstOrNull{ it.id == id}
+    /**
+     * Fetches a recipe by its ID.
+     */
+    suspend fun getRecipeForId(id: String): Recipe? {
+        return withContext(Dispatchers.IO) {
+            recipeDao.getRecipeById(id)
         }
-        return null
     }
 
+    /**
+     * Returns the list of recipes as LiveData, so changes are observed in real-time.
+     */
     fun getRecipeList(): LiveData<List<Recipe>> {
-        return recipesLiveData
+        return recipeDao.getAllRecipes()
     }
 
-    /* Returns a random recipe asset for recipes that are added. */
-    fun getRandomRecipeImageAsset(): Int? {
-        val randomNumber = (initialRecipeList.indices).random()
-        //return initialRecipeList[randomNumber].image
-        return 0
-    }
 
     companion object {
         private var INSTANCE: DataSource? = null
 
-        fun getDataSource(resources: Resources): DataSource {
+        fun getDataSource(context: Context): DataSource { //Resources?
             return synchronized(DataSource::class) {
-                val newInstance = INSTANCE ?: DataSource(resources)
+                val newInstance = INSTANCE ?: DataSource(context)
                 INSTANCE = newInstance
                 newInstance
             }
         }
     }
+
 }

@@ -81,13 +81,20 @@
                 android:layout_height="wrap_content" />
     </com.google.android.material.textfield.TextInputLayout>
 
-
+    <Button
+            android:id="@+id/open_gallery_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:text="@string/open_gallery_button_text" />
 
     <Button
             android:id="@+id/done_button"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="240dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="75dp"
             android:layout_gravity="center"
+            android:textSize="30dp"
             android:text="@string/done_button_text" />
 </LinearLayout>

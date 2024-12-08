@@ -2,6 +2,12 @@ plugins {
     alias(libs.plugins.kotlin.android)
     id("com.android.application")
     id("com.google.gms.google-services")
+    id("kotlin-kapt")
+    //id("com.google.devtools.ksp")
+}
+
+kapt {
+    correctErrorTypes = true
 }
 
 android {
@@ -39,14 +45,21 @@ android {
 dependencies {
     implementation(platform("com.google.firebase:firebase-bom:33.6.0"))
     implementation("com.google.firebase:firebase-analytics")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.androidx.recyclerview)
+    implementation(libs.androidx.room.runtime)
+    implementation(libs.androidx.lifecycle.livedata.ktx)
+    kapt(libs.androidx.room.compiler)
+    //ksp(libs.androidx.room.compiler.v250)
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.androidx.room.common)
+    implementation(libs.androidx.room.ktx)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
 }
+
