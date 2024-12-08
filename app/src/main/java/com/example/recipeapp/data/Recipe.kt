@@ -1,4 +1,4 @@
-package com.example.recipeapp.model
+package com.example.recipeapp.data
 
 data class Recipe(
     val id: String = "",
