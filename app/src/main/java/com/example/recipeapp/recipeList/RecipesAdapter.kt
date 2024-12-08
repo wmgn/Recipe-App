@@ -13,6 +13,10 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.R
 import com.example.recipeapp.data.Recipe
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.net.URL
@@ -42,11 +46,13 @@ class RecipesAdapter(private val onClick: (Recipe) -> Unit) :
 
             recipeTextView.text = recipe.title
             if (recipe.imageUrl != null) {
-                val bm = getImageBitmap(recipe.imageUrl)
-                if (bm != null){
-                    recipeImageView.setImageBitmap(bm)
-                } else {
-                    recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                CoroutineScope(Dispatchers.Main).launch {
+                    val bm = getImageBitmap(recipe.imageUrl)
+                    if (bm != null) {
+                        recipeImageView.setImageBitmap(bm)
+                    } else {
+                        recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                    }
                 }
             } else {
                 recipeImageView.setImageResource(R.drawable.ic_launcher_background)
@@ -79,6 +85,7 @@ object RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
     }
 }
 
+/*
 private fun getImageBitmap(url: String): Bitmap? {
     var bm: Bitmap? = null
     try {
@@ -94,4 +101,25 @@ private fun getImageBitmap(url: String): Bitmap? {
         //Log.w(TAG, "Error getting bitmap", e)
     }
     return bm
+}*/
+
+// Function to fetch a bitmap from a URL
+suspend fun getImageBitmap(url: String): Bitmap? {
+    return withContext(Dispatchers.IO) {
+        try {
+            val aURL = URL(url)
+            val conn = aURL.openConnection()
+            conn.connect()
+            val iS = conn.getInputStream()
+            val biS = BufferedInputStream(iS)
+            val bm = BitmapFactory.decodeStream(biS)
+            biS.close()
+            iS.close()
+            bm
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        }
+    }
 }
+
