@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:text="@string/recipe_string"
+            android:text="@string/recipes_shown_string"
             android:textAppearance="?attr/textAppearanceHeadline6" />
 
 </LinearLayout>

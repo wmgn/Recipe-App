@@ -67,7 +67,7 @@ class RecipeDetailActivity : AppCompatActivity() {
             }
             recipeIngredients.text = currentRecipe?.ingredients
             recipeInstructions.text = currentRecipe?.instructions
-            recipeRating.text = currentRecipe?.rating.toString() // TODO rating change to not text ?
+            recipeRating.text = "Rating: " + currentRecipe?.rating.toString() // TODO rating change to not text ?
 
             removeRecipeButton.setOnClickListener {
                 if (currentRecipe != null) {
