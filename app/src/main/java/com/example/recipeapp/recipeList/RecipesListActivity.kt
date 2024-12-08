@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.activity.viewModels
 import androidx.recyclerview.widget.ConcatAdapter
@@ -53,8 +54,11 @@ class RecipesListActivity : AppCompatActivity() {
 
     /* Opens RecipeDetailActivity when RecyclerView item is clicked. */
     private fun adapterOnClick(recipe: Recipe) {
+        //Log.w("Troubleshooting1", "adapterOnClick, recipe: " + recipe + "\ntoString: " + recipe.title.toString())
         val intent = Intent(this, RecipeDetailActivity()::class.java)
         intent.putExtra(RECIPE_ID, recipe.id)
+        //Log.w("Troubleshooting1", "RECIPE_ID: " + RECIPE_ID + "recipe.id" + recipe.id)
+        //Log.w("Troubleshooting1", "extras" + intent.extras)
         startActivity(intent)
     }
 

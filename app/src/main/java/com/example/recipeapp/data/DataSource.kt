@@ -32,9 +32,9 @@ class DataSource(resources: Resources) {
     }
 
     /* Returns recipe given an ID. */
-    fun getRecipeForId(id: Long): Recipe? {
+    fun getRecipeForId(id: String): Recipe? {
         recipesLiveData.value?.let { recipes ->
-            return recipes.firstOrNull{ it.id == id.toString()}
+            return recipes.firstOrNull{ it.id == id}
         }
         return null
     }

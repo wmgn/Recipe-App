@@ -3,6 +3,7 @@ package com.example.recipeapp.recipeDetail
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -28,7 +29,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_detail_activity)
 
-        var currentRecipeId: Long? = null
+        var currentRecipeId: String? = null
 
         /* Connect variables to UI elements. */
         val recipeTitle: TextView = findViewById(R.id.recipe_detail_title)
@@ -41,7 +42,8 @@ class RecipeDetailActivity : AppCompatActivity() {
 
         val bundle: Bundle? = intent.extras
         if (bundle != null) {
-            currentRecipeId = bundle.getLong(RECIPE_ID)
+            //Log.w("Troubleshooting1", "bundle: " + bundle.toString())
+            currentRecipeId = bundle.getString(RECIPE_ID)
         }
 
         /* If currentRecipeId is not null, get corresponding recipe and set name, image and

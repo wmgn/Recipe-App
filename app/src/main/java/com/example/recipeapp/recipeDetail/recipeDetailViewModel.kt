@@ -9,7 +9,7 @@ import com.example.recipeapp.data.Recipe
 class RecipeDetailViewModel(private val datasource: DataSource) : ViewModel() {
 
     /* Queries datasource to returns a recipe that corresponds to an id. */
-    fun getRecipeForId(id: Long) : Recipe? {
+    fun getRecipeForId(id: String) : Recipe? {
         return datasource.getRecipeForId(id)
     }
 
