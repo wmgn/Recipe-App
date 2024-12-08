@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+            android:id="@+id/recipe_detail_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="24dp"
+            android:paddingBottom="24dp"
+            android:text="@string/recipe1_name"
+            android:textAlignment="center"
+            android:textAppearance="?attr/textAppearanceHeadline3" />
+
+    <ImageView
+            android:id="@+id/recipe_detail_image"
+            android:layout_width="320dp"
+            android:layout_height="320dp"
+            android:layout_gravity="center"
+            android:contentDescription="@string/recipe_image_content_description"
+            app:srcCompat="@drawable/common_google_signin_btn_icon_dark_normal" />
+
+    <TextView
+            android:id="@+id/recipe_detail_ingredients"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/recipe1_ingredients" />
+
+    <TextView
+            android:id="@+id/recipe_detail_instructions"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/recipe1_instructions" />
+
+    <TextView
+            android:id="@+id/recipe_detail_rating"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="16dp"
+            android:text="@string/recipe1_rating" />
+
+    <Button
+            android:id="@+id/remove_button"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="240dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="@string/remove_this_recipe" />
+</LinearLayout>

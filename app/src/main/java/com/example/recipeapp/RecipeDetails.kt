@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 class RecipeDetails: AppCompatActivity() {
     fun onCreate() {
         enableEdgeToEdge()
-        setContentView(R.layout.recipe_details)
+        setContentView(R.layout.recipe_item)
 
     }
 }

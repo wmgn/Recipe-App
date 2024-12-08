@@ -1,3 +1,20 @@
 <resources>
     <string name="app_name">RecipeApp</string>
+    <string name="fab_content_description">fab</string>
+    <string name="element_text">element text example 1</string>
+    <string name="recipe1_name">Spaghetti (Example recipe1)</string>
+    <string name="recipe_image_content_description">Image of recipe</string>
+    <string name="recipe_finder">Recipe List/Search/Viewer/Finder</string>
+    <string name="recipe_string">Recipes</string>
+    <string name="remove_this_recipe">Remove This Recipe</string>
+    <string name="recipe1_description">recipe1_description_example</string>
+    <string name="recipe1_ingredients">recipe1 ingredients example1</string>
+    <string name="recipe1_instructions">recipe1 instructions example1, \n1. etc\n2. etc etc\n3. etc etc etc\nComplete</string>
+    <string name="recipe1_rating">recipe1 rating example: 5.0/5.0</string>
+    <string name="add_recipe">Add Recipe</string>
+    <string name="recipe_title_edit_text">Recipe Title</string>
+    <string name="recipe_ingredients_edit_text">Recipe Ingredients</string>
+    <string name="recipe_instructions_edit_text">Recipe Instructions</string>
+    <string name="done_button_text">Done</string>
+    <string name="recipe_imageUrl_edit_text">Recipe Image URL (e.g. https://thefoodcharlatan.com/wp-content/uploads/2023/04/Spaghetti-Sauce-Recipe-6.jpg)</string>
 </resources>
