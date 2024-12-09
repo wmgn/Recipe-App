@@ -42,6 +42,7 @@
         </activity>
         <activity android:name=".addRecipe.AddRecipeActivity" />
         <activity android:name=".recipeDetail.RecipeDetailActivity" />
+        <activity android:name=".browseDatabaseList.BrowseDatabaseListActivity" />
     </application>
 
 </manifest>

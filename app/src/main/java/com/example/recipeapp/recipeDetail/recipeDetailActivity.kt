@@ -98,6 +98,7 @@ class RecipeDetailActivity : AppCompatActivity() {
         val recipeRating: TextView = findViewById(R.id.recipe_detail_rating)
         val recipeRatingBar: RatingBar = findViewById(R.id.recipe_rating_bar)
         val removeRecipeButton: Button = findViewById(R.id.remove_button)
+        val publishRecipeButton: Button = findViewById(R.id.publish_button)
 
 
         val bundle: Bundle? = intent.extras
@@ -121,17 +122,17 @@ class RecipeDetailActivity : AppCompatActivity() {
                                 if (bm != null) {
                                     recipeImageView.setImageBitmap(bm)
                                 } else {
-                                    recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                                    recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
                                 }
                             }
                         } else if (File(imageUrl).exists()) {
                             val bitmap = BitmapFactory.decodeFile(imageUrl)
                             recipeImageView.setImageBitmap(bitmap)
                         } else {
-                            recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                            recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
                         }
                     } else {
-                        recipeImageView.setImageResource(R.drawable.ic_launcher_background)
+                        recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
                     }
 
                     recipeTitle.text = currentRecipe.title
@@ -144,6 +145,11 @@ class RecipeDetailActivity : AppCompatActivity() {
                     removeRecipeButton.setOnClickListener {
                         recipeDetailViewModel.removeRecipe(currentRecipe)
                         finish()
+                    }
+                    // remove button
+                    publishRecipeButton.setOnClickListener {
+                        //TODO write this code to
+                        //recipeDetailViewModel.publishRecipe(currentRecipe)
                     }
                 }
             }

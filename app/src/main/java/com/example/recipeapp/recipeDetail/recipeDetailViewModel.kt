@@ -33,6 +33,15 @@ class RecipeDetailViewModel(private val datasource: DataSource) : ViewModel() {
             datasource.removeRecipe(recipeToRemove)
         }
     }
+
+    /* Publishes/Uploads recipe to Firebase database */
+    fun publishRecipe(recipeToPublish: Recipe) {
+        CoroutineScope(Dispatchers.IO).launch {
+            // TODO write this function to do what its supposed to do
+            // TODO might not need to use datasource., maybe can just talk to/access firebase right here in the ViewModel, not sure.
+            //datasource.publishRecipe(recipeToPublish)
+        }
+    }
 }
 
 class RecipeDetailViewModelFactory(private val context: Context) : ViewModelProvider.Factory {

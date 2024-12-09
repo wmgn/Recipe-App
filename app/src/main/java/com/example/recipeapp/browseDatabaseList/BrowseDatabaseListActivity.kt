@@ -34,17 +34,17 @@ class BrowseDatabaseListActivity : AppCompatActivity() {
 
         /* Instantiates headerAdapter and recipesAdapter. Both adapters are added to concatAdapter.
         which displays the contents sequentially */
-        val headerAdapter = HeaderAdapter()
+        //val headerAdapter = HeaderAdapter()
         val recipesAdapter = RecipesAdapter { recipe -> adapterOnClick(recipe) }
-        val concatAdapter = ConcatAdapter(headerAdapter, recipesAdapter)
+        //val concatAdapter = ConcatAdapter(headerAdapter, recipesAdapter)
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
-        recyclerView.adapter = concatAdapter
+        recyclerView.adapter = recipesAdapter
 
         // TODO need to replace this with firebase stuff
         browseDatabaseListViewModel.recipesLiveData.observe(this, {
             it?.let {
                 recipesAdapter.submitList(it as MutableList<Recipe>)
-                headerAdapter.updateRecipeCount(it.size)
+                //headerAdapter.updateRecipeCount(it.size)
             }
         })
 

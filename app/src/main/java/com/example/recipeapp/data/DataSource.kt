@@ -31,6 +31,17 @@ class DataSource(context: Context) {
     }
 
     /**
+     * Publishes a recipe from the Room database to the Firebase database.
+     */
+    suspend fun publishRecipe(recipe: Recipe) {
+        // TODO write this function to do what it is supposed to do
+        // TODO not sure if this needs to be here actually
+        //withContext(Dispatchers.IO) {
+        //    recipeDao.deleteRecipe(recipe)
+        //}
+    }
+
+    /**
      * Fetches a recipe by its ID.
      */
     suspend fun getRecipeForId(id: String): Recipe? {

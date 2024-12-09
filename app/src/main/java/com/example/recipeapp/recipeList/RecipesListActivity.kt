@@ -16,6 +16,7 @@ import com.example.recipeapp.addRecipe.RECIPE_TITLE
 import com.example.recipeapp.addRecipe.RECIPE_INGREDIENTS
 import com.example.recipeapp.addRecipe.RECIPE_INSTRUCTIONS
 import com.example.recipeapp.addRecipe.RECIPE_IMAGEURL
+import com.example.recipeapp.browseDatabaseList.BrowseDatabaseListActivity
 import com.example.recipeapp.data.Recipe
 
 const val RECIPE_ID = "recipe id"
@@ -50,6 +51,10 @@ class RecipesListActivity : AppCompatActivity() {
         fab.setOnClickListener {
             fabOnClick()
         }
+        val fabBrowseDatabase: View = findViewById(R.id.fab_browse_database)
+        fabBrowseDatabase.setOnClickListener {
+            fabBrowseDatabaseOnClick()
+        }
     }
 
     /* Opens RecipeDetailActivity when RecyclerView item is clicked. */
@@ -66,6 +71,16 @@ class RecipesListActivity : AppCompatActivity() {
     private fun fabOnClick() {
         val intent = Intent(this, AddRecipeActivity::class.java)
         startActivityForResult(intent, newRecipeActivityRequestCode)
+    }
+
+    /* Adds recipe to recipeList when FAB is clicked. */
+    private fun fabBrowseDatabaseOnClick() {
+        // TODO needs to go to BrowseDatabaseListActivity
+        // Create an Intent to open the BrowseDatabaseListActivity
+        val intent = Intent(this, BrowseDatabaseListActivity::class.java)
+
+        // Start the activity
+        startActivity(intent)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {
