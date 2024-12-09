@@ -13,25 +13,18 @@
     android:layout_height="match_parent"
     app:layoutManager="LinearLayoutManager"/>
 
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab_browse_database"
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+    android:id="@+id/load_more_button"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:layout_margin="16dp"
     android:contentDescription="@string/fab_content_description"
-    android:src="@drawable/search_globe_svgrepo_com"
-    app:layout_constraintBottom_toTopOf="@id/fab"
-    app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.floatingactionbutton.FloatingActionButton
-    android:id="@+id/fab"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:layout_margin="16dp"
-    android:contentDescription="@string/fab_content_description"
+    android:text="@string/load_more"
     android:src="@drawable/ic_add_black_24dp"
     app:layout_constraintBottom_toBottomOf="parent"
-    app:layout_constraintEnd_toEndOf="parent"/>
+    app:layout_constraintStart_toStartOf="parent"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_anchorGravity="center"/>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
