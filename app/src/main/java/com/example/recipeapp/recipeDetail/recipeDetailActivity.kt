@@ -3,8 +3,9 @@ package com.example.recipeapp.recipeDetail
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.net.Uri
+import android.os.Build
 import android.os.Bundle
-import android.util.Log
+import android.view.WindowMetrics
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.RatingBar
@@ -13,6 +14,11 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recipeapp.R
 import com.example.recipeapp.recipeList.RECIPE_ID
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.AdSize
+import com.google.android.gms.ads.AdView
+import com.google.android.gms.ads.MobileAds
+import com.google.android.gms.ads.initialization.InitializationStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -20,6 +26,17 @@ import kotlinx.coroutines.withContext
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.net.URL
+import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
+import android.view.View
+import android.widget.LinearLayout
+import android.widget.PopupMenu
+import android.widget.Toast
+import com.google.android.gms.ads.RequestConfiguration
+import java.util.concurrent.atomic.AtomicBoolean
+import kotlinx.coroutines.launch
+
 
 class RecipeDetailActivity : AppCompatActivity() {
 
@@ -27,9 +44,60 @@ class RecipeDetailActivity : AppCompatActivity() {
         RecipeDetailViewModelFactory(this)
     }
 
+    private lateinit var adView : AdView // = AdView( this )
+    // [START get_ad_size]
+    // Get the ad size with screen width.
+    private val adSize: AdSize
+        get() {
+            val displayMetrics = resources.displayMetrics
+            val adWidthPixels =
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+                    val windowMetrics: WindowMetrics = this.windowManager.currentWindowMetrics
+                    windowMetrics.bounds.width()
+                } else {
+                    displayMetrics.widthPixels
+                }
+            val density = displayMetrics.density
+            val adWidth = (adWidthPixels / density).toInt()
+            return AdSize.getCurrentOrientationAnchoredAdaptiveBannerAdSize(this, adWidth)
+        }
+
+    // [END get_ad_size]
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.recipe_detail_activity)
+
+        // Initialize Mobile Ads SDK
+        MobileAds.initialize(this) { }
+        // [START create_ad_view]
+        // Create a new ad view.
+        val adView = AdView(this)
+        adView.adUnitId = "ca-app-pub-3940256099942544/9214589741" // adaptive banner ads
+        adView.setAdSize(adSize)
+        this.adView = adView
+
+        // Replace ad container with new ad view.
+        val adContainer: AdView = findViewById(R.id.ad_view)
+        adContainer.removeAllViews()
+        adContainer.addView(adView)
+
+        // Start loading the ad in the background.
+        val adRequest = AdRequest.Builder().build()
+        adView.loadAd(adRequest)
+
+        /* // Old Method that is simpler and works for fixed-size, but is not adaptive
+        // Find the AdView from XML layout
+        adView = findViewById(R.id.ad_view)
+        //adView.setAdSize(adSize)
+        // Load the Ad
+        val adRequest = AdRequest.Builder()
+            .addKeyword("cooking")
+            .addKeyword("recipe")
+            .build()
+        adView.loadAd(adRequest)
+        */
+
+
 
         var currentRecipeId: String? = null
 
@@ -94,6 +162,22 @@ class RecipeDetailActivity : AppCompatActivity() {
 
         }
 
+    }
+
+    // V5
+    override fun onPause() {
+        adView.pause()
+        super.onPause()
+    }
+
+    override fun onDestroy() {
+        adView.destroy()
+        super.onDestroy()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        adView.resume()
     }
 }
 

@@ -5,7 +5,7 @@ fun recipeList(): List<Recipe> {
     return listOf(
         Recipe(
             id = "0",
-            title = "Spaghetti (Example1)",
+            title = "Spaghetti (Example 1)",
             ingredients = "Noodles, Meatballs, Marinara Sauce, 1 pound ground beef · 1 medium onion, chopped · 4 cloves garlic, minced · 1 small green bell pepper, diced",
             instructions = "instructions example1, etc\n1. do -- etc\n2. do etc...\n3.Done",
             imageUrl = "https://media.istockphoto.com/id/1144823591/photo/spaghetti-in-a-dish-on-a-white-background.jpg?s=612x612&w=0&k=20&c=SeEWmJfPQlX1zVUHPKjL-cgYeMs9cZ97-kdZMm7feA4=",
@@ -13,7 +13,7 @@ fun recipeList(): List<Recipe> {
         ),
         Recipe(
             id = "1",
-            title = "Dumplings (Example2)",
+            title = "Dumplings (Example 2)",
             ingredients = "1/2 medium head Napa cabbage (about 1 pound)\n" +
                     "1 tablespoon kosher salt\n" +
                     "1 pound ground pork\n" +
@@ -39,7 +39,7 @@ fun recipeList(): List<Recipe> {
         ),
         Recipe(
             id = "2",
-            title = "Ramen (Example3)",
+            title = "Ramen (Example 3)",
             ingredients = "Noodles, Soy Sauce, 1 tablespoon sesame oil · 3 teaspoons grated ginger · 4 teaspoons grated garlic · 4 cups broth",
             instructions = "instructions example3, \nStep 1.etc \nStep 2.etc \nStep 3.etc",
             imageUrl = "https://media.istockphoto.com/id/607992438/photo/asian-noodles-with-beef-and-egg.jpg?s=612x612&w=0&k=20&c=k1yvKL16t_-KH5QFO8bE40tMJIkKGXxbhbCrpusje-4=",

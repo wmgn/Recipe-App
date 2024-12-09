@@ -4,7 +4,7 @@
     <string name="element_text">element text example 1</string>
     <string name="recipe1_name">Spaghetti (Example recipe1)</string>
     <string name="recipe_image_content_description">Image of recipe</string>
-    <string name="recipe_finder">Recipe List/Search/Viewer/Finder</string>
+    <string name="recipe_finder">Recipe List Viewer</string>
     <string name="recipes_shown_string">Recipes Shown</string>
     <string name="remove_this_recipe">Remove This Recipe</string>
     <string name="recipe1_description">recipe1_description_example</string>
