@@ -2,12 +2,14 @@ package com.example.recipeapp.addRecipe
 
 import android.app.Activity
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.widget.Button
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
 import com.example.recipeapp.R
 import com.google.android.material.textfield.TextInputEditText
+import java.io.File
 
 const val RECIPE_TITLE = "title"
 const val RECIPE_INGREDIENTS = "ingredients"
@@ -72,9 +74,28 @@ class AddRecipeActivity : AppCompatActivity() {
             resultIntent.putExtra(RECIPE_TITLE, title)
             resultIntent.putExtra(RECIPE_INGREDIENTS, ingredients)
             resultIntent.putExtra(RECIPE_INSTRUCTIONS, instructions)
-            resultIntent.putExtra(RECIPE_IMAGEURL, imageUrl)
+            if (imageUrl.startsWith("content://media/picker_get_content/")) {
+                val imageURI = Uri.parse(imageUrl)
+                val imageAbsolutePath = saveImageToInternalStorage(imageURI)
+                resultIntent.putExtra(RECIPE_IMAGEURL, imageAbsolutePath)
+            }else{
+                resultIntent.putExtra(RECIPE_IMAGEURL, imageUrl)
+            }
             setResult(Activity.RESULT_OK, resultIntent)
         }
         finish()
     }
+
+    private fun saveImageToInternalStorage(uri: Uri): String {
+        val fileName = "image_${System.currentTimeMillis()}.jpg"
+        val file = File(applicationContext.filesDir, fileName)
+
+        contentResolver.openInputStream(uri)?.use { inputStream ->
+            file.outputStream().use { outputStream ->
+                inputStream.copyTo(outputStream)
+            }
+        }
+        return file.absolutePath
+    }
 }
+

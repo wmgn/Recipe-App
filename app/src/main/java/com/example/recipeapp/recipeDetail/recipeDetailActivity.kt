@@ -2,7 +2,6 @@ package com.example.recipeapp.recipeDetail
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.view.WindowMetrics
@@ -18,7 +17,6 @@ import com.google.android.gms.ads.AdRequest
 import com.google.android.gms.ads.AdSize
 import com.google.android.gms.ads.AdView
 import com.google.android.gms.ads.MobileAds
-import com.google.android.gms.ads.initialization.InitializationStatus
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -26,16 +24,7 @@ import kotlinx.coroutines.withContext
 import java.io.BufferedInputStream
 import java.io.IOException
 import java.net.URL
-import android.util.Log
-import android.view.Menu
-import android.view.MenuItem
-import android.view.View
-import android.widget.LinearLayout
-import android.widget.PopupMenu
-import android.widget.Toast
-import com.google.android.gms.ads.RequestConfiguration
-import java.util.concurrent.atomic.AtomicBoolean
-import kotlinx.coroutines.launch
+import java.io.File
 
 
 class RecipeDetailActivity : AppCompatActivity() {
@@ -135,10 +124,9 @@ class RecipeDetailActivity : AppCompatActivity() {
                                     recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                                 }
                             }
-                        } else if (imageUrl.startsWith("content")) {
-                            // Handle local content URI
-                            val uri = Uri.parse(imageUrl)
-                            recipeImageView.setImageURI(uri)
+                        } else if (File(imageUrl).exists()) {
+                            val bitmap = BitmapFactory.decodeFile(imageUrl)
+                            recipeImageView.setImageBitmap(bitmap)
                         } else {
                             recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                         }

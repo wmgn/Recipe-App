@@ -9,6 +9,6 @@ data class Recipe(
     val title: String = "",
     val ingredients: String = "",
     val instructions: String = "",
-    val imageUrl: String = "", // or Uri in string format
+    val imageUrl: String = "", // or local filepath in app's private storage
     val rating: Float = 0.0f
 )

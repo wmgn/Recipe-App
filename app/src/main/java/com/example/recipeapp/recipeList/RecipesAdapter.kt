@@ -2,8 +2,6 @@ package com.example.recipeapp.recipeList
 
 import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.net.Uri
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -19,6 +17,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import java.io.BufferedInputStream
+import java.io.File
 import java.io.IOException
 import java.net.URL
 
@@ -58,10 +57,9 @@ class RecipesAdapter(private val onClick: (Recipe) -> Unit) :
                             recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                         }
                     }
-                } else if (imageUrl.startsWith("content")) {
-                    // Handle local content URI
-                    val uri = Uri.parse(imageUrl)
-                    recipeImageView.setImageURI(uri)
+                } else if (File(imageUrl).exists()) {
+                    val bitmap = BitmapFactory.decodeFile(imageUrl)
+                    recipeImageView.setImageBitmap(bitmap)
                 } else {
                     recipeImageView.setImageResource(R.drawable.ic_launcher_background)
                 }
@@ -95,24 +93,6 @@ object RecipeDiffCallback : DiffUtil.ItemCallback<Recipe>() {
         return oldItem.id == newItem.id
     }
 }
-
-/*
-private fun getImageBitmap(url: String): Bitmap? {
-    var bm: Bitmap? = null
-    try {
-        val aURL = URL(url)
-        val conn = aURL.openConnection()
-        conn.connect()
-        val iS = conn.getInputStream()
-        val biS = BufferedInputStream(iS)
-        bm = BitmapFactory.decodeStream(biS)
-        biS.close()
-        iS.close()
-    } catch (e: IOException) {
-        //Log.w(TAG, "Error getting bitmap", e)
-    }
-    return bm
-}*/
 
 // Function to fetch a bitmap from a URL
 suspend fun getImageBitmap(url: String): Bitmap? {
