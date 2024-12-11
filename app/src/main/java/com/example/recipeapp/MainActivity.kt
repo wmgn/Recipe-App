@@ -5,11 +5,10 @@ import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.recipeapp.recipeList.RecipesAdapter
 
-// currently not used at all in app
-// currently not used at all in app
-// currently not used at all in app
+// this file / class is currently not used in app
+// this file / class is currently not used in app
+// this file / class is currently not used in app
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
