@@ -4,8 +4,10 @@
         xmlns:android="http://schemas.android.com/apk/res/android"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_marginTop="20dp"
-        android:layout_height="wrap_content">
+        android:paddingTop="20dp"
+        android:paddingBottom="10dp"
+        android:layout_height="wrap_content"
+        android:background="@color/recipeappicon_background">
 
     <TextView
             android:id="@+id/header_text"
@@ -13,14 +15,14 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/recipe_finder"
-            android:textAppearance="?attr/textAppearanceHeadline3" />
+            android:textAppearance="?attr/textAppearanceHeadline3"/>
 
     <TextView
             android:id="@+id/recipe_number_text"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
 
     <TextView
             android:id="@+id/recipe_text"
@@ -28,6 +30,6 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="@string/recipes_shown_string"
-            android:textAppearance="?attr/textAppearanceHeadline6" />
+            android:textAppearance="?attr/textAppearanceHeadline6"/>
 
 </LinearLayout>
