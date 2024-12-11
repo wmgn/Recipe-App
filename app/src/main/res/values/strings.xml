@@ -21,6 +21,7 @@
     <string name="publish_this_recipe">Publish This Recipe</string>
     <string name="ingredients">Ingredients</string>
     <string name="instructions">Instructions</string>
+    <string name="rating_string">Rating: %s</string>
     <string name="load_more">Load More</string>
     <string name="recipe_browser">Recipe Database Browser</string>
 </resources>

@@ -48,7 +48,7 @@ dependencies {
     implementation(libs.firebase.analytics)
     // google play services for banner Advertisements
     //implementation(libs.play.services.ads)
-    implementation("com.google.android.gms:play-services-ads:23.6.0")
+    implementation(libs.play.services.ads)
     //implementation(libs.play.services.ads.lite)
     implementation(libs.play.services.measurement.api)
     // recyclerview

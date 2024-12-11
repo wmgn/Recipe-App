@@ -26,7 +26,6 @@ import java.io.IOException
 import java.net.URL
 import java.io.File
 
-
 class RecipeDetailActivity : AppCompatActivity() {
 
     private val recipeDetailViewModel by viewModels<RecipeDetailViewModel> {
@@ -122,23 +121,23 @@ class RecipeDetailActivity : AppCompatActivity() {
                                 if (bm != null) {
                                     recipeImageView.setImageBitmap(bm)
                                 } else {
-                                    recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                                    recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
                                 }
                             }
                         } else if (File(imageUrl).exists()) {
                             val bitmap = BitmapFactory.decodeFile(imageUrl)
                             recipeImageView.setImageBitmap(bitmap)
                         } else {
-                            recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                            recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
                         }
                     } else {
-                        recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                        recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
                     }
 
                     recipeTitle.text = currentRecipe.title
                     recipeIngredients.text = currentRecipe.ingredients
                     recipeInstructions.text = currentRecipe.instructions
-                    recipeRating.text = "Rating: " + currentRecipe.rating.toString()
+                    recipeRating.text = getString(R.string.rating_string, currentRecipe.rating.toString())
                     recipeRatingBar.rating = currentRecipe.rating
 
                     // remove button

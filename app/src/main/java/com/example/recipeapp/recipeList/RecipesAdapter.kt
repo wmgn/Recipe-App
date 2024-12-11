@@ -54,17 +54,17 @@ class RecipesAdapter(private val onClick: (Recipe) -> Unit) :
                         if (bm != null) {
                             recipeImageView.setImageBitmap(bm)
                         } else {
-                            recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                            recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
                         }
                     }
                 } else if (File(imageUrl).exists()) {
                     val bitmap = BitmapFactory.decodeFile(imageUrl)
                     recipeImageView.setImageBitmap(bitmap)
                 } else {
-                    recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                    recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
                 }
             } else {
-                recipeImageView.setImageResource(com.google.android.gms.base.R.drawable.googleg_disabled_color_18)
+                recipeImageView.setImageResource(R.drawable.image_missing_svgrepo_com)
             }
         }
     }

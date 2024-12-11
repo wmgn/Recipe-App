@@ -7,7 +7,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.recipeList.RecipesAdapter
 
-// currently not used
+// currently not used at all in app
+// currently not used at all in app
+// currently not used at all in app
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
