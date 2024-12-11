@@ -18,6 +18,8 @@ roomCommon = "2.6.1"
 roomCompiler = "2.5.0"
 roomKtx = "2.6.1"
 playServicesAdsLite = "23.6.0"
+firebaseDatabaseKtx = "21.0.0"
+firebaseStorageKtx = "21.0.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -40,6 +42,8 @@ androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = 
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 play-services-measurement-api = { module = "com.google.android.gms:play-services-measurement-api", version.ref = "playServicesMeasurementApi" }
 play-services-ads-lite = { group = "com.google.android.gms", name = "play-services-ads-lite", version.ref = "playServicesAdsLite" }
+firebase-database-ktx = { group = "com.google.firebase", name = "firebase-database-ktx", version.ref = "firebaseDatabaseKtx" }
+firebase-storage-ktx = { group = "com.google.firebase", name = "firebase-storage-ktx", version.ref = "firebaseStorageKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

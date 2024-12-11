@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.activity.viewModels
-import androidx.recyclerview.widget.ConcatAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.recipeapp.recipeDetail.RecipeDetailActivity
 import com.example.recipeapp.R
@@ -15,10 +14,8 @@ import com.example.recipeapp.addRecipe.RECIPE_INGREDIENTS
 import com.example.recipeapp.addRecipe.RECIPE_INSTRUCTIONS
 import com.example.recipeapp.addRecipe.RECIPE_IMAGEURL
 import com.example.recipeapp.data.Recipe
-import com.example.recipeapp.recipeList.HeaderAdapter
 import com.example.recipeapp.recipeList.RecipesAdapter
-import com.example.recipeapp.recipeList.RecipesListViewModel
-import com.example.recipeapp.recipeList.RecipesListViewModelFactory
+import com.google.firebase.database.FirebaseDatabase
 
 const val RECIPE_ID = "recipe id"
 
@@ -28,50 +25,52 @@ class BrowseDatabaseListActivity : AppCompatActivity() {
         BrowseDatabaseListViewModelFactory(this)
     }
 
+    private lateinit var recipeAdapter: RecipesAdapter
+    private val recipes = mutableListOf<Recipe>()
+    private val firebase = FirebaseDatabase.getInstance().reference.child("recipes")
+    // and FirebaseReference classes, along with ValueEventListener interface
+
+    //val recipesLiveData = dataSource.getRecipeList()
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.browse_database_list_activity)
 
         /* Instantiates headerAdapter and recipesAdapter. Both adapters are added to concatAdapter.
-        which displays the contents sequentially */
+        which displays the contents sequentially */ // not done this way anymore
         //val headerAdapter = HeaderAdapter()
-        val recipesAdapter = RecipesAdapter { recipe -> adapterOnClick(recipe) }
         //val concatAdapter = ConcatAdapter(headerAdapter, recipesAdapter)
+        val recipesAdapter = RecipesAdapter { recipe -> adapterOnClick(recipe) }
         val recyclerView: RecyclerView = findViewById(R.id.recycler_view)
+        //recyclerView.adapter = concatAdapter
         recyclerView.adapter = recipesAdapter
 
+        browseDatabaseListViewModel.fetchRecipes(3, recipesAdapter) // TODO fetchRecipes possible implementation
+
+
         // TODO need to replace this with firebase stuff
-        browseDatabaseListViewModel.recipesLiveData.observe(this, {
-            it?.let {
+        browseDatabaseListViewModel.recipesLiveData.observe(this) { recipes ->
+            recipes?.let {
                 recipesAdapter.submitList(it as MutableList<Recipe>)
                 //headerAdapter.updateRecipeCount(it.size)
             }
-        })
+        }
 
-        val load_more_button: View = findViewById(R.id.load_more_button)
-        load_more_button.setOnClickListener {
-            load_more_buttonOnClick()
+        val loadMoreButton: View = findViewById(R.id.load_more_button)
+        loadMoreButton.setOnClickListener {
+            //load_more_buttonOnClick()
+            browseDatabaseListViewModel.fetchRecipes(3, recipesAdapter) // TODO fetchRecipes possible implementation
         }
     }
+
 
     /* Opens RecipeDetailActivity when RecyclerView item is clicked. */
     // TODO need to rewrite this, maybe still use RecipeDetailActivity, let it somehow access firebase? not sure
     // might need to write new browseDatabaseDetail package
     private fun adapterOnClick(recipe: Recipe) {
-        //Log.w("Troubleshooting1", "adapterOnClick, recipe: " + recipe + "\ntoString: " + recipe.title.toString())
         val intent = Intent(this, RecipeDetailActivity()::class.java)
         intent.putExtra(RECIPE_ID, recipe.id)
-        //Log.w("Troubleshooting1", "RECIPE_ID: " + RECIPE_ID + "recipe.id" + recipe.id)
-        //Log.w("Troubleshooting1", "extras" + intent.extras)
         startActivity(intent)
-    }
-
-    /* fetches more recipes from firebase database, to display. */
-    private fun load_more_buttonOnClick() {
-        //val intent = Intent(this, AddRecipeActivity::class.java)
-        //startActivityForResult(intent, newRecipeActivityRequestCode)
-        // TODO need to write code to fetch more recipes from firebase database here
-
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, intentData: Intent?) {

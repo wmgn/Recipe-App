@@ -46,6 +46,8 @@ dependencies {
     // firebase
     implementation(platform(libs.firebase.bom))
     implementation(libs.firebase.analytics)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.storage.ktx)
     // google play services for banner Advertisements
     //implementation(libs.play.services.ads)
     implementation(libs.play.services.ads)
@@ -56,7 +58,6 @@ dependencies {
     // ROOM database stuff
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.lifecycle.livedata.ktx)
-
     kapt(libs.androidx.room.compiler)
     //ksp(libs.androidx.room.compiler.v250)
 

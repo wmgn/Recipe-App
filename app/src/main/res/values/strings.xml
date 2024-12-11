@@ -24,4 +24,5 @@
     <string name="rating_string">Rating: %s</string>
     <string name="load_more">Load More</string>
     <string name="recipe_browser">Recipe Database Browser</string>
+    <string name="save_this_recipe">Save This Recipe</string>
 </resources>

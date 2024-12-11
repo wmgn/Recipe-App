@@ -111,11 +111,27 @@
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="240dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginBottom="80dp"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
                     android:backgroundTint="#112CFFAA"
                     android:text="@string/publish_this_recipe" />
+
+            <Button
+                    android:id="@+id/save_button"
+                    style="?attr/materialButtonOutlinedStyle"
+                    android:layout_width="240dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:backgroundTint="#1100FF00"
+                    android:text="@string/save_this_recipe" />
+
+            <TextView
+                    android:id="@+id/margin_bottom_textview"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp"
+                    android:text="" />
         </LinearLayout>
 
     </ScrollView>
