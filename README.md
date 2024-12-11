@@ -1,7 +1,7 @@
 ## Main Start Screen Recipe List View
 - Recipe data is saved in device's local storage, using the Room persistence library, which provides an abstraction layer over SQLite
 
-- Floating action buttons direct users to the Recipe Database Browser or to Add a Recipe
+- Floating action buttons direct users to the 🌐[Recipe Database Browser](#recipe-database-browser-view) or to ➕[Add a Recipe](#add-recipe-view)
 
 <img src="https://github.com/user-attachments/assets/2630a9d1-8aa8-4dd3-985c-71b1c83df812" width="200" />
 
