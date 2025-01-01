@@ -9,9 +9,9 @@ An Android app for managing recipes, written in Kotlin using Android Studio
 <img src="https://github.com/user-attachments/assets/2630a9d1-8aa8-4dd3-985c-71b1c83df812" width="200" />
 
 ## Recipe Detail View
-- Adaptive banner advertisement using Google AdMob
-
 - Users can remove, publish, or save recipes, depending on whether the recipe is already downloaded locally or not
+
+- Adaptive banner advertisement using Google AdMob
 
 <img src="https://github.com/user-attachments/assets/6387ce91-86f9-4bc3-b21e-b60a3b124035" width="200" />
 <img src="https://github.com/user-attachments/assets/bc9a11a9-7ec8-4866-9469-15ca72a635bf" width="200" />
