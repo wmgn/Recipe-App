@@ -1,3 +1,6 @@
+# Recipe App
+An Android app for managing recipes, written in Kotlin using Android Studio
+
 ## Main Start Screen Recipe List View
 - Recipe data is saved in device's local storage, using the Room persistence library, which provides an abstraction layer over SQLite
 
@@ -8,10 +11,11 @@
 ## Recipe Detail View
 - Adaptive banner advertisement using Google AdMob
 
-- Users can publish, save, and remove recipes
+- Users can remove, publish, or save recipes, depending on whether the recipe is already downloaded locally or not
 
 <img src="https://github.com/user-attachments/assets/6387ce91-86f9-4bc3-b21e-b60a3b124035" width="200" />
 <img src="https://github.com/user-attachments/assets/bc9a11a9-7ec8-4866-9469-15ca72a635bf" width="200" />
+<img src="https://github.com/user-attachments/assets/52f9d33f-5772-4b56-a5ef-a42b35004e1f" width="200" />
 
 ## Recipe Database Browser View
 - Recipe data is stored remotely and persistently in Google's NoSQL cloud Firebase realtime database
